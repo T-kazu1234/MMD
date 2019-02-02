@@ -26,9 +26,9 @@ SummonAnzuClass.prototype.init = function () {
     const container = document.getElementById("world");
 
     // カメラの位置を設定
-    $sao.camera.position.z = 30;
-    $sao.camera.position.x = 30;
-    $sao.camera.position.y = 30;
+    $sao.camera.position.z = 300;
+   // $sao.camera.position.x = 30;
+   // $sao.camera.position.y = 30;
 
     // レンダラーを設定
     $sao.renderer.setPixelRatio(window.devicePixelRatio);
