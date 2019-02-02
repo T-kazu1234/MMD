@@ -113,7 +113,7 @@ const SummonAnzuClass = function () {
             renderer.render(scene, camera);
         }
     }
-    */
+
 
 //VR ページの読み込みを待つ
 //window.addEventListener('DOMContentLoaded', init);
@@ -136,10 +136,10 @@ antialias: true
 });
 //VR レンダラーのWebVR設定を有効にする
 renderer.vr.enabled = true;
-
+  */
 
 SummonAnzuClass.prototype.init = function () {
-
+  
     "use strict";
 // 描画エリア
         const container = document.getElementById("world");
