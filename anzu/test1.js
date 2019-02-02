@@ -19,7 +19,7 @@ const SummonAnzuClass = function () {
     this.effect = new THREE.OutlineEffect(this.renderer);	// OutlineEffect.js
 };
 
-//VR ページの読み込みを待つ
+/*VR ページの読み込みを待つ
 window.addEventListener('DOMContentLoaded', init);
 
 // initialize
@@ -38,7 +38,7 @@ function init() {
         antialias:true
     });
     renderer.setSize(width, height);
-*/          
+          
     //VR レンダラーのWebVR設定を有効にする
     renderer.vr.enabled = true;
 
@@ -62,7 +62,6 @@ function init() {
     cameraContainer.add(camera);
     scene.add(cameraContainer);
     cameraContainer.position.y = 100;
-    /*
         // 光源を作成
         {
             const spotLight = new THREE.SpotLight(0xFFFFFF, 4, 2000, Math.PI / 5, 0.2, 1.5);
