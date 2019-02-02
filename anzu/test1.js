@@ -19,28 +19,9 @@ const SummonAnzuClass = function () {
     this.effect = new THREE.OutlineEffect(this.renderer);	// OutlineEffect.js
 };
 
-/*VR ページの読み込みを待つ
-window.addEventListener('DOMContentLoaded', init);
 
-// initialize
-
-function init() {
-    //VR ポリフィルを使用
-    const polyfill = new WebVRPolyfill();
 /*
-    // サイズを指定
-    const width = 960;
-    const height = 540;
 
-    // レンダラーを作成
-    const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas'),
-        antialias:true
-    });
-    renderer.setSize(width, height);
-          
-    //VR レンダラーのWebVR設定を有効にする
-    renderer.vr.enabled = true;
 
 
     const container = document.getElementById('container');
@@ -134,15 +115,39 @@ function init() {
     }
     */
 
+//VR ページの読み込みを待つ
+//window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', SummonAnzuClass.prototype.init);
+
+//VR ポリフィルを使用
+const polyfill = new WebVRPolyfill();
+
+// initialize
+
+// サイズを指定
+const width = 960;
+const height = 540;
+ 
+//レンダラーを作成
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#myCanvas'),
+    renderer.setSize(width, height);
+antialias: true
+});
+//VR レンダラーのWebVR設定を有効にする
+renderer.vr.enabled = true;
 
 
 SummonAnzuClass.prototype.init = function () {
+
     "use strict";
-    // 描画エリア
-    const container = document.getElementById("world");
+// 描画エリア
+        const container = document.getElementById("world");
+
 
     // カメラの位置を設定
     $sao.camera.position.z = 30;
+
 
     // レンダラーを設定
     $sao.renderer.setPixelRatio(window.devicePixelRatio);
@@ -244,88 +249,86 @@ SummonAnzuClass.prototype.init = function () {
                 $sao.physicsHelper.visible = api.show_rigid_bodies;
             }
         });
+    };       // MMDモデルのファイルパス
+    //  const modelFile = "./models/111yuukiaine.pmx";
+    //  const modelFile = "./models/111yuukiaine.pmx";
+    //  const modelFile = "./models/111yuukiaine.pmx";
+    //  const modelFile = "./models/111yuukiaine.pmx";
+    //  const modelFile = "./models/111yuukiaine.pmx";
+    //  const modelFile = "./models/111yuukiaine.pmx";
+        const modelFile = "./models/112mio.pmx";
+        const vmdFiles = ["./models/haruhi.vmd"];
+    
+        // MMDLoader.js：MMDファイル読み込み用
+        // mmdparser.min.js：依存ファイル
+        // TGALoader.js：依存ファイル
+        // CCDIKSolver.js：依存ファイル
+        // MMDPhysics.js：依存ファイル
+        // ammo.js：依存ファイル
+        const loader = new THREE.MMDLoader();
+        loader.load(
+            modelFile,
+            vmdFiles,
+            function (object) {
+                const mesh = object;
+                mesh.position.y = -10;
+                $sao.scene.add(mesh);
+                $sao.helper.add(mesh);
+                $sao.helper.setAnimation(mesh);
+    
+                $sao.ikHelper = new THREE.CCDIKHelper(mesh);
+                $sao.ikHelper.visible = false;
+                $sao.scene.add($sao.ikHelper);
+    
+                $sao.helper.setPhysics(mesh);
+                $sao.physicsHelper = new THREE.MMDPhysicsHelper(mesh);
+                $sao.physicsHelper.visible = false;
+                $sao.scene.add($sao.physicsHelper);
+    
+                $sao.helper.unifyAnimationDuration({ afterglow: 2.0 });
+    
+                //initGui(mesh);
+                $sao.animate();
+            },
+            onProgress,
+            onError
+        );
     };
-
-    // MMDモデルのファイルパス
-//  const modelFile = "./models/111yuukiaine.pmx";
-//  const modelFile = "./models/111yuukiaine.pmx";
-//  const modelFile = "./models/111yuukiaine.pmx";
-//  const modelFile = "./models/111yuukiaine.pmx";
-//  const modelFile = "./models/111yuukiaine.pmx";
-//  const modelFile = "./models/111yuukiaine.pmx";
-    const modelFile = "./models/112mio.pmx";
-    const vmdFiles = ["./models/haruhi.vmd"];
-
-    // MMDLoader.js：MMDファイル読み込み用
-    // mmdparser.min.js：依存ファイル
-    // TGALoader.js：依存ファイル
-    // CCDIKSolver.js：依存ファイル
-    // MMDPhysics.js：依存ファイル
-    // ammo.js：依存ファイル
-    const loader = new THREE.MMDLoader();
-    loader.load(
-		modelFile,
-		vmdFiles,
-		function (object) {
-		    const mesh = object;
-		    mesh.position.y = -10;
-		    $sao.scene.add(mesh);
-		    $sao.helper.add(mesh);
-		    $sao.helper.setAnimation(mesh);
-
-		    $sao.ikHelper = new THREE.CCDIKHelper(mesh);
-		    $sao.ikHelper.visible = false;
-		    $sao.scene.add($sao.ikHelper);
-
-		    $sao.helper.setPhysics(mesh);
-		    $sao.physicsHelper = new THREE.MMDPhysicsHelper(mesh);
-		    $sao.physicsHelper.visible = false;
-		    $sao.scene.add($sao.physicsHelper);
-
-		    $sao.helper.unifyAnimationDuration({ afterglow: 2.0 });
-
-		    //initGui(mesh);
-		    $sao.animate();
-		},
-		onProgress,
-		onError
-	);
-};
-
-SummonAnzuClass.prototype.animate = function () {
-    window.requestAnimationFrame($sao.animate);
-    $sao.stats.begin();
-    $sao.render();
-    $sao.stats.end();
-};
-
-SummonAnzuClass.prototype.render = function () {
-    $sao.helper.animate($sao.clock.getDelta());
-
-    if ($sao.physicsHelper !== undefined && $sao.physicsHelper.visible) {
-        $sao.physicsHelper.update();
-    }
-
-    if ($sao.ikHelper !== undefined && $sao.ikHelper.visible) {
-        $sao.ikHelper.update();
-    }
-
-    $sao.effect.render($sao.scene, $sao.camera);
-};
-
-SummonAnzuClass.prototype.onWindowResize = function () {
-    $sao.width = window.innerWidth;
-    $sao.height = window.innerHeight;
-    $sao.halfX = window.innerWidth / 2;
-    $sao.halfY = window.innerHeight / 2;
-    $sao.camera.aspect = $sao.width / $sao.height;
-    $sao.camera.updateProjectionMatrix();
-    $sao.effect.setSize($sao.width, $sao.height);
-};
-
-const $sao = new SummonAnzuClass();
-window.addEventListener("resize", $sao.onWindowResize, false);
-window.addEventListener("DOMContentLoaded", function () {
-    "use strict";
-    $sao.init();
-}, false);
+    
+    SummonAnzuClass.prototype.animate = function () {
+        window.requestAnimationFrame($sao.animate);
+        $sao.stats.begin();
+        $sao.render();
+        $sao.stats.end();
+    };
+    
+    SummonAnzuClass.prototype.render = function () {
+        $sao.helper.animate($sao.clock.getDelta());
+    
+        if ($sao.physicsHelper !== undefined && $sao.physicsHelper.visible) {
+            $sao.physicsHelper.update();
+        }
+    
+        if ($sao.ikHelper !== undefined && $sao.ikHelper.visible) {
+            $sao.ikHelper.update();
+        }
+    
+        $sao.effect.render($sao.scene, $sao.camera);
+    };
+    
+    SummonAnzuClass.prototype.onWindowResize = function () {
+        $sao.width = window.innerWidth;
+        $sao.height = window.innerHeight;
+        $sao.halfX = window.innerWidth / 2;
+        $sao.halfY = window.innerHeight / 2;
+        $sao.camera.aspect = $sao.width / $sao.height;
+        $sao.camera.updateProjectionMatrix();
+        $sao.effect.setSize($sao.width, $sao.height);
+    };
+    
+    const $sao = new SummonAnzuClass();
+    window.addEventListener("resize", $sao.onWindowResize, false);
+    window.addEventListener("DOMContentLoaded", function () {
+        "use strict";
+        $sao.init();
+    }, false);
