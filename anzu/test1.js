@@ -137,7 +137,7 @@ SummonAnzuClass.prototype.init = function () {
 //  const modelFile = "./models/111yuukiaine.pmx";
 //  const modelFile = "./models/111yuukiaine.pmx";
 //  const modelFile = "./models/111yuukiaine.pmx";
-    const modelFile = "./models/112湊みお.pmx";
+    const modelFile = "./models/112mio.pmx";
     const vmdFiles = ["./models/haruhi.vmd"];
 
     // MMDLoader.js：MMDファイル読み込み用
