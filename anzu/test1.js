@@ -1,4 +1,4 @@
-/* global THREE, Stats, dat */
+ï»¿/* global THREE, Stats, dat */
 // constructor
 const SummonAnzuClass = function () {
     "use strict";
@@ -19,27 +19,27 @@ const SummonAnzuClass = function () {
     this.effect = new THREE.OutlineEffect(this.renderer);	// OutlineEffect.js
 };
 
-/*VR ƒy[ƒW‚Ì“Ç‚İ‚İ‚ğ‘Ò‚Â
+/*VR ãƒšãƒ¼ã‚¸ã®èª­ã¿è¾¼ã¿ã‚’å¾…ã¤
 window.addEventListener('DOMContentLoaded', init);
 
 // initialize
 
 function init() {
-    //VR ƒ|ƒŠƒtƒBƒ‹‚ğg—p
+    //VR ãƒãƒªãƒ•ã‚£ãƒ«ã‚’ä½¿ç”¨
     const polyfill = new WebVRPolyfill();
 /*
-    // ƒTƒCƒY‚ğw’è
+    // ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
     const width = 960;
     const height = 540;
 
-    // ƒŒƒ“ƒ_ƒ‰[‚ğì¬
+    // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’ä½œæˆ
     const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas'),
         antialias:true
     });
     renderer.setSize(width, height);
           
-    //VR ƒŒƒ“ƒ_ƒ‰[‚ÌWebVRİ’è‚ğ—LŒø‚É‚·‚é
+    //VR ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®WebVRè¨­å®šã‚’æœ‰åŠ¹ã«ã™ã‚‹
     renderer.vr.enabled = true;
 
 
@@ -48,21 +48,21 @@ function init() {
     container.style.width = width;
     container.style.height = height;
 
-    // WebVR‚ÌŠJnƒ{ƒ^ƒ“‚ğDOM‚É’Ç‰Á
+    // WebVRã®é–‹å§‹ãƒœã‚¿ãƒ³ã‚’DOMã«è¿½åŠ 
     container.appendChild(WEBVR.createButton(renderer));
 
-    // ƒV[ƒ“‚ğì¬
+    // ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
     const scene = new THREE.Scene();
 
-    // ƒJƒƒ‰‚ğì¬
+    // ã‚«ãƒ¡ãƒ©ã‚’ä½œæˆ
     const camera = new THREE.PerspectiveCamera(90, width / height);
 
-    // ƒJƒƒ‰—pƒRƒ“ƒeƒi‚ğì¬
+    // ã‚«ãƒ¡ãƒ©ç”¨ã‚³ãƒ³ãƒ†ãƒŠã‚’ä½œæˆ
     const cameraContainer = new THREE.Object3D();
     cameraContainer.add(camera);
     scene.add(cameraContainer);
     cameraContainer.position.y = 100;
-        // ŒõŒ¹‚ğì¬
+        // å…‰æºã‚’ä½œæˆ
         {
             const spotLight = new THREE.SpotLight(0xFFFFFF, 4, 2000, Math.PI / 5, 0.2, 1.5);
             spotLight.position.set(500, 300, 500);
@@ -71,12 +71,12 @@ function init() {
             const ambientLight = new THREE.AmbientLight(0x333333);
             scene.add(ambientLight);
         }
-        // ’n–Ê‚ğì¬
+        // åœ°é¢ã‚’ä½œæˆ
         {
-            // °‚ÌƒeƒNƒXƒ`ƒƒ[
+            // åºŠã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼
             const texture = new THREE.TextureLoader().load('imgs/floor.png');
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // ƒŠƒs[ƒg‰Â”\‚É
-            texture.repeat.set(10, 10); // 10x10ƒ}ƒX‚Éİ’è
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // ãƒªãƒ”ãƒ¼ãƒˆå¯èƒ½ã«
+            texture.repeat.set(10, 10); // 10x10ãƒã‚¹ã«è¨­å®š
             texture.magFilter = THREE.NearestFilter;
             const floor = new THREE.Mesh(
                 new THREE.PlaneGeometry(1000, 1000),
@@ -86,11 +86,11 @@ function init() {
             scene.add(floor);
         }
         const boxList = [];
-        // —§•û‘Ì‚ğì¬
+        // ç«‹æ–¹ä½“ã‚’ä½œæˆ
         {
-            // —§•û‘Ì‚ÌƒWƒIƒƒgƒŠ‚ğì¬
+            // ç«‹æ–¹ä½“ã®ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚’ä½œæˆ
             const geometry = new THREE.BoxGeometry(45, 45, 45);
-            // —§•û‘Ì‚ğ•¡”ì¬‚µƒ‰ƒ“ƒ_ƒ€‚É”z’u
+            // ç«‹æ–¹ä½“ã‚’è¤‡æ•°ä½œæˆã—ãƒ©ãƒ³ãƒ€ãƒ ã«é…ç½®
             const num = 60;
             loop: for (let i = 0; i < num; i++) {
                 const px = Math.round((Math.random() - 0.5) * 19) * 50 + 25;
@@ -102,7 +102,7 @@ function init() {
                         continue loop;
                     }
                 }
-                // —§•û‘Ì‚Ìƒ}ƒeƒŠƒAƒ‹‚ğì¬
+                // ç«‹æ–¹ä½“ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ä½œæˆ
                 const material = new THREE.MeshStandardMaterial({color: 0x1000000 * Math.random(), roughness: 0.1, metalness: 0.5});
                 const box = new THREE.Mesh(geometry, material);
                 box.position.x = px;
@@ -113,22 +113,22 @@ function init() {
             }
         }
     
-        // ƒŒƒ“ƒ_ƒ‰[‚Éƒ‹[ƒvŠÖ”‚ğ“o˜^
+        // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã«ãƒ«ãƒ¼ãƒ—é–¢æ•°ã‚’ç™»éŒ²
         renderer.setAnimationLoop(tick);
               
         let time = 0;
               
-        // –ˆƒtƒŒ[ƒ€‚ÉÀs‚³‚ê‚éƒ‹[ƒvƒCƒxƒ“ƒg
+        // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹ãƒ«ãƒ¼ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
         function tick() {
             time += 1;
                   
-            // —§•û‘Ì‚ğ“®‚©‚·
+            // ç«‹æ–¹ä½“ã‚’å‹•ã‹ã™
             const length = boxList.length;
             for (let i = 0; i < length; i++) {
                 boxList[i].position.y = 125 + 100 * Math.cos(time * 0.0005 * i + i / 10);
             }
                   
-            // ƒŒƒ“ƒ_ƒŠƒ“ƒO
+            // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
             renderer.render(scene, camera);
         }
     }
@@ -138,30 +138,30 @@ function init() {
 
 SummonAnzuClass.prototype.init = function () {
     "use strict";
-    // •`‰æƒGƒŠƒA
+    // æç”»ã‚¨ãƒªã‚¢
     const container = document.getElementById("world");
 
-    // ƒJƒƒ‰‚ÌˆÊ’u‚ğİ’è
+    // ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’è¨­å®š
     $sao.camera.position.z = 30;
 
-    // ƒŒƒ“ƒ_ƒ‰[‚ğİ’è
+    // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’è¨­å®š
     $sao.renderer.setPixelRatio(window.devicePixelRatio);
     $sao.renderer.setSize($sao.width, $sao.height);
     container.appendChild($sao.renderer.domElement);
 
-    // ƒV[ƒ“‚ğİ’èi” ‚İ‚½‚¢‚È‚à‚Ìj
+    // ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šï¼ˆç®±ã¿ãŸã„ãªã‚‚ã®ï¼‰
     $sao.scene.background = new THREE.Color(0xffffff);
 
-    // ƒOƒŠƒbƒh‚ğ•\¦‚·‚éiƒfƒoƒbƒO—pj
+    // ã‚°ãƒªãƒƒãƒ‰ã‚’è¡¨ç¤ºã™ã‚‹ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
     const gridHelper = new THREE.PolarGridHelper(30, 10);
     gridHelper.position.y = -10;
     $sao.scene.add(gridHelper);
 
-    // ŠÂ‹«ŒõŒ¹i‹Ï“™‚ÉŒõ‚ğ“–‚Ä‚éj
+    // ç’°å¢ƒå…‰æºï¼ˆå‡ç­‰ã«å…‰ã‚’å½“ã¦ã‚‹ï¼‰
     const ambient = new THREE.AmbientLight(0x666666);
     $sao.scene.add(ambient);
 
-    // •½sŒõŒ¹
+    // å¹³è¡Œå…‰æº
     const DirectionalLight = new THREE.DirectionalLight(0x887766);
     DirectionalLight.position.set(-1, 1, 1).normalize();
     $sao.scene.add(DirectionalLight);
@@ -169,7 +169,7 @@ SummonAnzuClass.prototype.init = function () {
     // 
     container.appendChild($sao.stats.dom);
 
-    // MMDƒ‚ƒfƒ‹ƒ[ƒh‚Ì“r’†Œo‰ß‚ğŠÄ‹
+    // MMDãƒ¢ãƒ‡ãƒ«ãƒ­ãƒ¼ãƒ‰æ™‚ã®é€”ä¸­çµŒéã‚’ç›£è¦–
     const onProgress = function (xhr) {
         if (xhr.lengthComputable) {
             const percentConplete = xhr.loaded / xhr.total * 100;
@@ -177,12 +177,12 @@ SummonAnzuClass.prototype.init = function () {
         }
     };
 
-    // MMDƒ‚ƒfƒ‹ƒ[ƒh‚ÌƒGƒ‰[ˆ—
+    // MMDãƒ¢ãƒ‡ãƒ«ãƒ­ãƒ¼ãƒ‰æ™‚ã®ã‚¨ãƒ©ãƒ¼å‡¦ç†
     const onError = function (xhr) {
         window.console.log(xhr);
     };
 
-    // Œõ‚ªƒƒbƒVƒ…‚Ì•\–Ê‚É“–‚½‚Á‚½‚Ç‚¤‚Ì‚±‚¤‚Ì‚È‚é‚â‚Â
+    // å…‰ãŒãƒ¡ãƒƒã‚·ãƒ¥ã®è¡¨é¢ã«å½“ãŸã£ãŸæ™‚ã©ã†ã®ã“ã†ã®ãªã‚‹ã‚„ã¤
     let phongMaterials;
     let originalMaterials;
     const makePhongMaterials = function (materials) {
@@ -199,7 +199,7 @@ SummonAnzuClass.prototype.init = function () {
         phongMaterials = array;
     };
 
-    // Šeíƒpƒ‰ƒ[ƒ^‚ğON/OFF‚·‚é‚â‚ÂiƒfƒoƒbƒO—pj
+    // å„ç¨®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ON/OFFã™ã‚‹ã‚„ã¤ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
     const initGui = function (mesh) {
         const api = {
             "animation": true,
@@ -210,7 +210,7 @@ SummonAnzuClass.prototype.init = function () {
             "show_IK_bones": false,
             "show_rigid_bodies": false
         };
-        // dat.gui.min.jsF
+        // dat.gui.min.jsï¼š
         const gui = new dat.GUI();
         gui.add(api, "animation").onChange(function () {
             $sao.helper.doAnimation = api.animation;
@@ -246,7 +246,7 @@ SummonAnzuClass.prototype.init = function () {
         });
     };
 
-    // MMDƒ‚ƒfƒ‹‚Ìƒtƒ@ƒCƒ‹ƒpƒX
+    // MMDãƒ¢ãƒ‡ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
 //  const modelFile = "./models/111yuukiaine.pmx";
 //  const modelFile = "./models/111yuukiaine.pmx";
 //  const modelFile = "./models/111yuukiaine.pmx";
@@ -256,12 +256,12 @@ SummonAnzuClass.prototype.init = function () {
     const modelFile = "./models/112mio.pmx";
     const vmdFiles = ["./models/haruhi.vmd"];
 
-    // MMDLoader.jsFMMDƒtƒ@ƒCƒ‹“Ç‚İ‚İ—p
-    // mmdparser.min.jsFˆË‘¶ƒtƒ@ƒCƒ‹
-    // TGALoader.jsFˆË‘¶ƒtƒ@ƒCƒ‹
-    // CCDIKSolver.jsFˆË‘¶ƒtƒ@ƒCƒ‹
-    // MMDPhysics.jsFˆË‘¶ƒtƒ@ƒCƒ‹
-    // ammo.jsFˆË‘¶ƒtƒ@ƒCƒ‹
+    // MMDLoader.jsï¼šMMDãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ç”¨
+    // mmdparser.min.jsï¼šä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ«
+    // TGALoader.jsï¼šä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ«
+    // CCDIKSolver.jsï¼šä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ«
+    // MMDPhysics.jsï¼šä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ«
+    // ammo.jsï¼šä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ«
     const loader = new THREE.MMDLoader();
     loader.load(
 		modelFile,
