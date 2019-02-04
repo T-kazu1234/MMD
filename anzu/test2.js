@@ -250,7 +250,7 @@ SummonAnzuClass.prototype.init = function () {
     //  const modelFile = "./models/111yuukiaine.pmx";
     //  const modelFile = "./models/111yuukiaine.pmx";
     //  const modelFile = "./models/111yuukiaine.pmx";
-        const modelFile = "./models/Kanata式_東風谷早苗_ビキニ_Ver0.92.5/sanae_bikini.pmx";
+    const modelFile = "./models/sanae_bikini/sanae_bikini.pmx";
     //  const modelFile = "./models/112mio.pmx";
         const vmdFiles = ["./models/haruhi.vmd"];
     
