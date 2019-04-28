@@ -146,7 +146,7 @@ SummonAnzuClass.prototype.init = function () {
 
 
     // カメラの位置を設定
-    $sao.camera.position.z = 30;
+    $sao.camera.position.z = 300;
 
 
     // レンダラーを設定
