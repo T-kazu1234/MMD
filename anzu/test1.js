@@ -145,14 +145,19 @@ SummonAnzuClass.prototype.init = function () {
         const container = document.getElementById("world");
 
 
+        let i=50;
+    //    for (let i = 0; i < 300; i++);
     // カメラの位置を設定
-    $sao.camera.position.z = 300;
-
+//    $sao.camera.position.x = i;
+    $sao.camera.position.y = 0;
+    $sao.camera.position.z = i;
 
     // レンダラーを設定
     $sao.renderer.setPixelRatio(window.devicePixelRatio);
     $sao.renderer.setSize($sao.width, $sao.height);
     container.appendChild($sao.renderer.domElement);
+
+
 
     // シーンを設定（箱みたいなもの）
     $sao.scene.background = new THREE.Color(0xffffff);
